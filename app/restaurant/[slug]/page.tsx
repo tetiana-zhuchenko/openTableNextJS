@@ -1,13 +1,14 @@
+import Link from 'next/link'
+
 export default function RestaurantDetails() {
   return (
     <main className="bg-gray-100 min-h-screen w-screen">
       <main className="max-w-screen-2xl m-auto bg-white">
         {/* NAVBAR */}
         <nav className="bg-white p-2 flex justify-between">
-          <a href="#" className="font-bold text-gray-700 text-2xl">
-            {' '}
-            OpenTable{' '}
-          </a>
+          <Link href="/" className="font-bold text-gray-700 text-2xl">
+            OpenTable
+          </Link>
           <div>
             <div className="flex">
               <button className="bg-blue-400 text-white p-1 px-4 rounded mr-3">
@@ -30,14 +31,12 @@ export default function RestaurantDetails() {
           <div className="bg-white w-[70%] rounded p-3 shadow">
             {/* RESTAURANT NAVBAR */}
             <nav className="flex text-reg border-b pb-2">
-              <a href="" className="mr-7 capitalize">
-                {' '}
-                overview{' '}
-              </a>
-              <a href="" className="mr-7 capitalize">
-                {' '}
-                Menu{' '}
-              </a>
+              <Link href="/restaurant/subido/" className="mr-7 capitalize">
+                Overview
+              </Link>
+              <Link href="/restaurant/subido/menu" className="mr-7 capitalize">
+                Menu
+              </Link>
             </nav>
             {/* RESTAURANT NAVBAR */} {/* TITLE */}
             <div className="mt-4 border-b pb-6">

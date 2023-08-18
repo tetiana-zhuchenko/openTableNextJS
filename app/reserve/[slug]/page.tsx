@@ -1,13 +1,14 @@
+import Link from 'next/link'
+
 export default function Reserve() {
   return (
     <main className="bg-gray-100 min-h-screen w-screen">
       <main className="max-w-screen-2xl m-auto bg-white">
         {/* NAVBAR */}
         <nav className="bg-white p-2 flex justify-between">
-          <a href="#" className="font-bold text-gray-700 text-2xl">
-            {' '}
-            OpenTable{' '}
-          </a>
+          <Link href="/" className="font-bold text-gray-700 text-2xl">
+            OpenTable
+          </Link>
           <div>
             <div className="flex">
               <button className="bg-blue-400 text-white p-1 px-4 rounded mr-3">
@@ -39,7 +40,8 @@ export default function Reserve() {
                 </div>
               </div>
             </div>
-            {/* HEADER */} {/* FORM */}
+            {/* HEADER */}
+            {/* FORM */}
             <div className="mt-10 flex flex-wrap justify-between w-[660px]">
               <input
                 type="text"
