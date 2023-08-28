@@ -10,8 +10,9 @@ export default function Images({ images }: { images: string[] }) {
         {images.map((image) => (
           <img
             src={image}
-            alt="restaurant holl"
+            alt="restaurant image"
             className="w-56 h-44 mr-1 mb-1"
+            key={images[0]}
           />
         ))}
       </div>
