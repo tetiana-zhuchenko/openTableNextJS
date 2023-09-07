@@ -42,7 +42,11 @@ export default async function Search({
       <div className="flex py-4 m-auto w-2/3 justify-between items-start">
         <SearchSideBar />
         <div className="w-5/6">
-          <RestaurantCard />
+          {restaurants.length ? (
+            <RestaurantCard />
+          ) : (
+            <p>Sorry, we found no restaurants in this area</p>
+          )}
         </div>
       </div>
     </>
