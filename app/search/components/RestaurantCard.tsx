@@ -1,28 +1,47 @@
+import { Cuisine, PRICE, Location } from '@prisma/client'
 import Link from 'next/link'
+import { type } from 'os'
+import Price from '../../components/Price'
 
-export default function RestaurantCard() {
+interface RestaurantCardPropsType {
+  id: number
+  name: string
+  main_image: string
+  cuisine: Cuisine
+  slug: string
+  location: Location
+  price: PRICE
+}
+
+export default function RestaurantCard({
+  restaurant,
+}: {
+  restaurant: RestaurantCardPropsType
+}) {
   return (
-    <div className="border-b flex pb-5">
+    <div className="border-b flex pb-5 ml-5">
       <img
-        src="https://resizer.otstatic.com/v2/photos/xlarge/1/42699253.webp"
+        src={restaurant.main_image}
         alt="srimps"
-        className="w-44 rounded"
+        className="w-44 h-36 rounded"
       />
       <div className="pl-5">
-        <h2 className="text-3xl">Madison & Vine</h2>
+        <h2 className="text-3xl">{restaurant.name}</h2>
         <div className="flex items-start">
           <div className="flex mb-2">*****</div>
           <p className="ml-2 text-sm">Awesome</p>
         </div>
         <div className="mb-9">
           <div className="font-light flex text-reg">
-            <p className="mr-4">$$$</p>
-            <p className="mr-4">Mexican</p>
-            <p className="mr-4">Ottawa</p>
+            <Price price={restaurant.price} />
+            <p className="mr-4 capitalize">{restaurant.cuisine.name}</p>
+            <p className="mr-4 capitalize">{restaurant.location.name}</p>
           </div>
         </div>
         <div className="text-red-600">
-          <Link href="/restaurant/subido">View more information</Link>
+          <Link href={`/restaurant/${restaurant.slug}`}>
+            View more information
+          </Link>
         </div>
       </div>
     </div>
