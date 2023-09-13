@@ -5,7 +5,58 @@ import { PRICE, PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-const fetchRestaurantsByCity = (city: string | undefined) => {
+interface SearchParams {
+  city?: string
+  cuisine?: string
+  price?: PRICE
+}
+
+interface WhereObj {
+  location?: {
+    name: {
+      equals: string
+    }
+  }
+
+  cuisine?: {
+    name: {
+      equals: string
+    }
+  }
+
+  price?: {
+    equals: PRICE
+  }
+}
+
+const fetchRestaurantsByCity = (searchParams: SearchParams) => {
+  const where: WhereObj = {}
+
+  if (searchParams.city) {
+    const location = {
+      name: {
+        equals: searchParams.city.toLocaleLowerCase(),
+      },
+    }
+    where.location = location
+  }
+
+  if (searchParams.cuisine) {
+    const cuisine = {
+      name: {
+        equals: searchParams.cuisine.toLocaleLowerCase(),
+      },
+    }
+    where.cuisine = cuisine
+  }
+
+  if (searchParams.price) {
+    const price = {
+      equals: searchParams.price,
+    }
+    where.price = price
+  }
+
   const select = {
     id: true,
     name: true,
@@ -16,15 +67,8 @@ const fetchRestaurantsByCity = (city: string | undefined) => {
     slug: true,
   }
 
-  if (!city) return prisma.restaurant.findMany({ select })
   return prisma.restaurant.findMany({
-    where: {
-      location: {
-        name: {
-          equals: city.toLocaleLowerCase(),
-        },
-      },
-    },
+    where,
     select,
   })
 }
@@ -40,9 +84,9 @@ const fetchCuisines = async () => {
 export default async function Search({
   searchParams,
 }: {
-  searchParams: { city?: string; cuisine?: string; price?: PRICE }
+  searchParams: SearchParams
 }) {
-  const restaurants = await fetchRestaurantsByCity(searchParams.city)
+  const restaurants = await fetchRestaurantsByCity(searchParams)
   const locations = await fetchLocations()
   const cuisines = await fetchCuisines()
 
