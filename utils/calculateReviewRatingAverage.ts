@@ -8,5 +8,5 @@ export const calculateReviewRatingAverage = (reviews: Review[]) => {
     reviews.reduce((sum, review) => {
       return sum + review.rating
     }, 0) / reviews.length
-  ).toFixed(1)
+  )
 }
