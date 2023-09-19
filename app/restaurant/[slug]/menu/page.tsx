@@ -13,7 +13,7 @@ const fetcRestaurantMenu = async (slug: string) => {
       items: true,
     },
   })
-  if (!restaurant) throw new Error()
+  if (!restaurant) throw new Error('Cannot find a restaurant')
 
   return restaurant.items
 }
