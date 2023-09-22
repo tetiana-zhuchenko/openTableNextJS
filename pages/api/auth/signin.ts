@@ -1,6 +1,6 @@
+import { PrismaClient } from '@prisma/client'
 import { NextApiRequest, NextApiResponse } from 'next'
 import validator from 'validator'
-import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
 import * as jose from 'jose'
 
@@ -11,42 +11,19 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const { firstName, lastName, email, phone, city, password } = req.body
-
     const errors: string[] = []
+    const { email, password } = req.body
 
     const validationSchema = [
-      {
-        valid: validator.isLength(firstName, {
-          min: 1,
-          max: 20,
-        }),
-        errorMessage: 'First name is invalid',
-      },
-      {
-        valid: validator.isLength(lastName, {
-          min: 1,
-          max: 20,
-        }),
-        errorMessage: 'Last name is invalid',
-      },
       {
         valid: validator.isEmail(email),
         errorMessage: 'Email is invalid',
       },
       {
-        valid: validator.isMobilePhone(phone),
-        errorMessage: 'Phone number is invalid',
-      },
-      {
-        valid: validator.isLength(city, {
+        valid: validator.isLength(password, {
           min: 1,
         }),
-        errorMessage: 'City is invalid',
-      },
-      {
-        valid: validator.isStrongPassword(password),
-        errorMessage: 'Password is not strong enough',
+        errorMessage: 'Password is invalid',
       },
     ]
 
@@ -66,30 +43,25 @@ export default async function handler(
       },
     })
 
-    if (userWithEmail) {
+    if (!userWithEmail) {
       return res
-        .status(400)
-        .json({ errorMessage: 'Email is associated with another account' })
+        .status(401)
+        .json({ errorMessage: 'Email or password is invalid' })
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10)
+    const isMatch = await bcrypt.compare(password, userWithEmail.password)
 
-    const user = await prisma.user.create({
-      data: {
-        first_name: firstName,
-        last_name: lastName,
-        password: hashedPassword,
-        city,
-        phone,
-        email,
-      },
-    })
+    if (!isMatch) {
+      return res
+        .status(401)
+        .json({ errorMessage: 'Email or password is invalid' })
+    }
 
     const alg = 'HS256'
     const secret = new TextEncoder().encode(process.env.JWT_SECRET)
 
     const token = await new jose.SignJWT({
-      email: user.email,
+      email: userWithEmail.email,
     })
       .setProtectedHeader({ alg })
       .setExpirationTime('24h')
@@ -99,6 +71,5 @@ export default async function handler(
       token: token,
     })
   }
-
   return res.status(404).json('Undefined endpoint')
 }
