@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal'
 import AuthModalInputs from './AuthModalInputs'
 import useAuth from '../../hooks/useAuth'
 import { AuthenticationContext } from '../context/AuthContext'
-import { CircularProgress } from '@mui/material'
+import { Alert, CircularProgress } from '@mui/material'
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -71,7 +71,7 @@ export default function AuthModal({ isSingin }: { isSingin: boolean }) {
 
   const handleClick = () => {
     if (isSingin) {
-      signin({ email: inputs.email, password: inputs.password })
+      signin({ email: inputs.email, password: inputs.password }, handleClose)
     }
   }
 
@@ -100,6 +100,11 @@ export default function AuthModal({ isSingin }: { isSingin: boolean }) {
             </>
           ) : (
             <div className="p-2">
+              {error ? (
+                <Alert severity="error" className="mb-9 text-red-800">
+                  {error}
+                </Alert>
+              ) : null}
               <div className="uppercase font-bold text-center pb-2 border-b mb-2">
                 <p className="text-sm">
                   {renderContent('Sign In', 'Create Account')}
