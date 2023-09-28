@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useContext } from 'react'
 import { AuthenticationContext } from '../app/context/AuthContext'
+import { getCookie } from 'cookies-next'
 
 const useAuth = () => {
   const { data, error, loading, setAuthState } = useContext(
@@ -30,7 +31,7 @@ const useAuth = () => {
           password,
         }
       )
-      console.log(response)
+
       setAuthState({
         data: response.data,
         error: null,
@@ -80,7 +81,7 @@ const useAuth = () => {
           phone,
         }
       )
-      console.log(response)
+
       setAuthState({
         data: response.data,
         error: null,
