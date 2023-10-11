@@ -161,7 +161,8 @@ export default async function handler(
         booker_first_name: bookerFirstName,
         booker_last_name: bookerLastName,
         restaurant_id: restaurant.id,
-        booker_occasion: bookerRequest,
+        booker_occasion: bookerOccasion,
+        booker_request: bookerRequest,
       },
     })
 
