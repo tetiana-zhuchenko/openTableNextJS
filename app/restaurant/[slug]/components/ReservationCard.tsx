@@ -23,8 +23,6 @@ export default function ReservationCard({
   const [partySize, setPartySize] = useState('2')
   const [day, setDay] = useState(new Date().toISOString().split('T')[0])
 
-  console.log({ data })
-
   const handleChangeDate = (date: Date | null) => {
     if (date) {
       setDay(date.toISOString().split('T')[0])
