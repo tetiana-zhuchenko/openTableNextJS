@@ -91,7 +91,7 @@ function Page() {
             type="text"
             suppressHydrationWarning
             className="rounded mr-3 p-2 w-[350px] border border-gray-500"
-            placeholder=""
+            placeholder="Введіть відгук..."
             id="reviewInput"
             name="reviewInput"
             value={reviewText}
