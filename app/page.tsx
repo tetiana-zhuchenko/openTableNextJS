@@ -6,11 +6,11 @@ export interface RestaurantCardType {
   id: number
   name: string
   main_image: string
-  cuisine: Cuisine
-  location: Location
+  Cuisine: Cuisine
+  Location: Location
   price: PRICE
   slug: string
-  reviews: Review[]
+  Review: Review[]
 }
 
 const prisma = new PrismaClient()
@@ -21,11 +21,11 @@ const fetchRestaurants = async (): Promise<RestaurantCardType[]> => {
       id: true,
       name: true,
       main_image: true,
-      cuisine: true,
+      Cuisine: true,
       slug: true,
-      location: true,
+      Location: true,
       price: true,
-      reviews: true,
+      Review: true,
     },
   })
   return restaurants
