@@ -1,6 +1,5 @@
 import { Cuisine, PRICE, Location, Review } from '@prisma/client'
 import Link from 'next/link'
-import { type } from 'os'
 import Price from '../../components/Price'
 import { calculateReviewRatingAverage } from '../../../utils/calculateReviewRatingAverage'
 import Stars from '../../components/Stars'

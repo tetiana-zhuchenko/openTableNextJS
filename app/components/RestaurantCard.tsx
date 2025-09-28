@@ -19,16 +19,16 @@ export default function RestaurantCard({ restaurant }: Props) {
         <div className="p-1">
           <h3 className="font-bold text-2xl mb-2">{restaurant.name}</h3>
           <div className="flex items-start">
-            <Stars reviews={restaurant.reviews} />
+            <Stars reviews={restaurant.Review} />
             <p className="ml-2">
-              {restaurant.reviews.length} review
-              {restaurant.reviews.length > 1 ? 's' : ''}
+              {restaurant.Review.length} review
+              {restaurant.Review.length > 1 ? 's' : ''}
             </p>
           </div>
           <div className="flex text-reg font-light capitalize">
-            <p className="mr-3">{restaurant.cuisine.name}</p>
+            <p className="mr-3">{restaurant.Cuisine.name}</p>
             <Price price={restaurant.price} />
-            <p className="mr-3">{restaurant.location.name}</p>
+            <p className="mr-3">{restaurant.Location.name}</p>
           </div>
           <p className="text-sm font-bold mt-1">Booked 3 times today</p>
         </div>
