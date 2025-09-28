@@ -38,7 +38,11 @@ export const findAvailableTables = async ({
     select: {
       number_of_people: true,
       booking_time: true,
-      tables: true,
+      BookingsOnTables: {
+        select: {
+          table_id: true,
+        },
+      },
     },
   })
 
@@ -46,7 +50,7 @@ export const findAvailableTables = async ({
 
   bookings.forEach((booking) => {
     bookingTablesObj[booking.booking_time.toISOString()] =
-      booking.tables.reduce((obj, table) => {
+      booking.BookingsOnTables.reduce((obj, table) => {
         return {
           ...obj,
           [table.table_id]: true,
