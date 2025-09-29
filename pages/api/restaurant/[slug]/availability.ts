@@ -26,7 +26,7 @@ export default async function handler(
         slug,
       },
       select: {
-        tables: true,
+        Table: true,
         open_time: true,
         close_time: true,
       },

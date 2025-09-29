@@ -15,7 +15,7 @@ export const findAvailableTables = async ({
   day: string
   res: NextApiResponse
   restaurant: {
-    tables: Table[]
+    Table: Table[]
     open_time: string
     close_time: string
   }
@@ -58,7 +58,7 @@ export const findAvailableTables = async ({
       }, {})
   })
 
-  const tables = restaurant.tables
+  const tables = restaurant.Table
 
   const searchTimesWithTables = searchTimes.map((searchTime) => {
     return {
