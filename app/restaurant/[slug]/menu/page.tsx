@@ -10,12 +10,12 @@ const fetcRestaurantMenu = async (slug: string) => {
       slug,
     },
     select: {
-      items: true,
+      Item: true,
     },
   })
   if (!restaurant) throw new Error('Cannot find a restaurant')
 
-  return restaurant.items
+  return restaurant.Item
 }
 
 export default async function RestaurantMenu({
