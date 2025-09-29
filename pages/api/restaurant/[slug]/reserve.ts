@@ -69,7 +69,7 @@ export default async function handler(
       },
       select: {
         id: true,
-        tables: true,
+        Table: true,
         open_time: true,
         close_time: true,
       },
