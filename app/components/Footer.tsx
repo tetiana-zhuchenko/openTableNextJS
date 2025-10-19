@@ -12,6 +12,12 @@ export default function Footer() {
           >
             Test Analyze Review
           </Link>
+          <Link
+            href="/dashboard"
+            className="font-bold text-gray-700 text-xl hover:text-gray-900"
+          >
+            Dashboard
+          </Link>
           <p className="text-sm text-gray-600">
             Contact: kn24-t.zhuchenko@nubip.edu.ua
           </p>
